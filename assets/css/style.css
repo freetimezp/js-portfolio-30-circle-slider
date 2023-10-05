@@ -7,6 +7,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    background-color: #000;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -75,15 +79,39 @@
 
 .bg-slide .circle.small {
     clip-path: circle(30% at 50% 50%);
-}
-
-.bg-slide.active .circle.small {
     z-index: 12;
 }
 
 .bg-slide .circle img {
     object-fit: cover;
-    transform: rotate(0deg) scale(1.05);
+    transform: rotate(0deg) scale(2.3);
+    opacity: 0;
+    transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.bg-slide.active .circle img {
+    transform: rotate(360deg) scale(1.15);
+    opacity: 1;
+}
+
+.bg-slide.after-active .circle img {
+    transform: rotate(720deg) scale(2.3);
+    opacity: 0;
+}
+
+.bg-slide.active .circle.bg img,
+.bg-slide.after-active .circle.bg img {
+    transition-delay: .9s;
+}
+
+.bg-slide.active .circle.large img,
+.bg-slide.after-active .circle.large img {
+    transition-delay: .6s;
+}
+
+.bg-slide.active .circle.small img,
+.bg-slide.after-active .circle.small img {
+    transition-delay: .3s;
 }
 
 .circle-darktransp {
@@ -104,6 +132,11 @@
     z-index: 101;
 }
 
+.content-text .top,
+.content-text .bottom {
+    overflow: hidden;
+} 
+
 .content-text .bottom {
     margin-top: 60px;
 }
@@ -114,19 +147,16 @@
     text-transform: uppercase;
     line-height: 1;
     opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-delay: 1s;
 }
-
-.bg-slide.active .content-text .top h1,
-.bg-slide.active .content-text .bottom h2 {
-    opacity: 1;
-}
-
 
 .content-text .top h1 {
     font-size: 80px;
     font-weight: 200;
     letter-spacing: 80px;
     margin-right: -80px;
+    transform: translateY(100%);
 }
 
 .content-text .bottom h2 {
@@ -134,6 +164,23 @@
     font-weight: 300;
     letter-spacing: 30px;
     margin-right: -30px;
+    transform: translateY(-100%);
+}
+
+.bg-slide.active .content-text .top h1,
+.bg-slide.active .content-text .bottom h2 {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.bg-slide.after-active .content-text .top h1 {
+    opacity: 1;
+    transform: translateY(-100%);
+}
+
+.bg-slide.after-active .content-text .bottom h2 {
+    opacity: 1;
+    transform: translateY(100%);
 }
 
 .line {
@@ -161,6 +208,13 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+}
+
+.rotate-btn.active {
+    transform: rotate(360deg);
+    pointer-events: none;
+    transition: transform .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-delay: .3s;
 }
 
 .rotate-btn i {
